@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitTaker : MonoBehaviour
 {
 
-    [SerializeField] int health = 3;
+    [SerializeField] int health;
 
 
     // Start is called before the first frame update
@@ -23,6 +23,7 @@ public class HitTaker : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         health -= Damage;
+
         if (health <= 0)
         {
             Destroy(gameObject);

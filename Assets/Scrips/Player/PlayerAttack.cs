@@ -5,7 +5,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-
+using Unity.Mathematics;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] GameObject HayMaker;
@@ -15,15 +15,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] AnimationControler animc;
 
 
-    public bool charging;
-    public float charge;
-    int ChargeSpeed = 45;
-    
+    public bool charging = false;
+    public float charge = 0;
+    int chargeSpeed = 45;
+    int baseDamage = 45;
 
-    // Start is called before the first frame update4
-
-
-
+    private void Awake() => ChargeBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, charge);
 
     private void Update()
     {
@@ -46,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (charging && charge < 100)
         {
-            charge += ChargeSpeed * Time.deltaTime;
+            charge += chargeSpeed * Time.deltaTime;
             ChargeBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, charge);
         }
     }
@@ -56,11 +53,12 @@ public class PlayerAttack : MonoBehaviour
 
         charging = false;
 
-        animc.TrowPunch(); 
+        animc.TrowPunch();
 
         GameObject Hay = Instantiate(HayMaker, PunchLocation.position, Orient.rotation);
         Hay.GetComponent<Transform>().localScale = new Vector3(1.5f, 1.5f, ((1.5f * (charge / 100) + 0.5f)));
-
+        Hay.GetComponentInChildren<DealDamage>().SetDamage(Mathf.RoundToInt(baseDamage * (charge/100)));
+        
         charge = 0;
 
         ChargeBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, charge);

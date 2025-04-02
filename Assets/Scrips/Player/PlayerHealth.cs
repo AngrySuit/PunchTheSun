@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,9 +26,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        print("Being Called");
         health -= damage;
-        healthText.text = health.ToString();
+
+        StartCoroutine("UpdateHealth",damage);
 
         if (health < 0)
         {
@@ -36,4 +37,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private IEnumerator UpdateHealth(int Change)
+    {
+        for (int i = 0; i != Change; i++)
+        {
+            health--;
+            healthText.text = health.ToString() ;
+
+            yield return new WaitForSeconds(0.03f);
+        }
+    }
 }

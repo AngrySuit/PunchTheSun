@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 4290915019005398322}
   - component: {fileID: 2478721514208479234}
   - component: {fileID: 5725439791415197926}
-  - component: {fileID: 5027675991994001359}
   - component: {fileID: 2691941570189341029}
+  - component: {fileID: 5027675991994001359}
+  - component: {fileID: 3377126762164424280}
   - component: {fileID: 2104398888364830293}
   m_Layer: 0
   m_Name: Test Dumy Chaser
@@ -155,18 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
---- !u!114 &5027675991994001359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565231001706301304}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221b4889301875241a68c727d2a7683c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2691941570189341029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +168,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd79ad2c077a3dc438bc38206849b7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5027675991994001359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565231001706301304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221b4889301875241a68c727d2a7683c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3377126762164424280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565231001706301304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc07adb2e93b8d248a4fc752c0529946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nav: {fileID: 2104398888364830293}
 --- !u!195 &2104398888364830293
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -188,16 +202,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 565231001706301304}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5555556
+  m_Radius: 0.5
   m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.2222223
+  m_Height: 2.25
   m_BaseOffset: 1.1111112
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 1

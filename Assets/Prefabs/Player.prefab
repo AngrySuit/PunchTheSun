@@ -107,10 +107,11 @@ GameObject:
   - component: {fileID: 7376739560077642137}
   - component: {fileID: 6734598956019818380}
   - component: {fileID: 6631811037172177138}
+  - component: {fileID: 4780775739391068732}
   - component: {fileID: 3713764240978498575}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +231,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animright: {fileID: 0}
   pa: {fileID: 6734598956019818380}
+--- !u!114 &4780775739391068732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359841582786450211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05abca9c82ef00142907c351b924e6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
 --- !u!114 &3713764240978498575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +362,7 @@ MonoBehaviour:
     m_ActionId: abf3e048-b4e5-4df0-8259-4a227b72f4e5
     m_ActionName: Player/Jump
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

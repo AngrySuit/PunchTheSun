@@ -9,8 +9,6 @@ public class EnemyDamageDealer : MonoBehaviour
     [SerializeField] int attackDelay = 60;
 
     bool canAttack = true;
-    float attackDelayScaled;
-
 
     NavMeshAgent nav;
     GameObject player;
@@ -19,8 +17,6 @@ public class EnemyDamageDealer : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
-
-        attackDelayScaled = attackDelay * Time.deltaTime;
     }
 
 
@@ -43,9 +39,11 @@ public class EnemyDamageDealer : MonoBehaviour
 
         transform.GetComponent<ChasePlayer>().enabled = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(attackDelay/2);
 
-        transform.GetComponent<ChasePlayer>().enabled = false;
+        transform.GetComponent<ChasePlayer>().enabled = true;
+
+        yield return new WaitForSeconds(attackDelay);
 
         canAttack = true;
     }

@@ -244,6 +244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 0}
+  healthBags:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  health: 100
 --- !u!114 &3713764240978498575
 MonoBehaviour:
   m_ObjectHideFlags: 0

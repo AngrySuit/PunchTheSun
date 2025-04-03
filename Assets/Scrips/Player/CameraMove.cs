@@ -5,20 +5,15 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
 
-    // From https://www.youtube.com/watch?v=f473C43s8nE //
+    //From "https://www.youtube.com/watch?v=f473C43s8nE"//
 
-
+    //Holds the transform of the Main Camera//
     public Transform cameraPosition;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    //Update is called once per frame//
     void Update()
     {
+        //Sets the cameras Position to the Camera Holder position//
         transform.position = cameraPosition.position;
     }
 }

@@ -31,7 +31,6 @@ public class EnemyDamageDealer : MonoBehaviour
 
         if (nav.stoppingDistance >= distance.magnitude && canAttack)
         {
-            print("Got'Ya");
             StartCoroutine("DealDamage",damage);
         }
     }
@@ -42,8 +41,12 @@ public class EnemyDamageDealer : MonoBehaviour
 
         player.GetComponent<PlayerHealth>().TakeDamage(damage);
 
+        transform.GetComponent<ChasePlayer>().enabled = false;
+
         yield return new WaitForSeconds(2);
-        
+
+        transform.GetComponent<ChasePlayer>().enabled = false;
+
         canAttack = true;
     }
 

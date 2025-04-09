@@ -178,7 +178,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4315217164682207802}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 221b4889301875241a68c727d2a7683c, type: 3}
   m_Name: 
@@ -209,10 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059a3437f6848624494ea7e5e17654f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  rangeMax: 10
+  rangeMin: 2
   damage: 40
   attackDelay: 6
-  windUp: 60
+  windUp: 2
 --- !u!195 &6586114651650284655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -227,7 +228,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.75
+  m_StoppingDistance: 3.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

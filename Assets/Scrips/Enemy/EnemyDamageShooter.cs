@@ -6,12 +6,14 @@ using UnityEngine.AI;
 
 public class EnemyDamageShooter : MonoBehaviour
 {
-    [SerializeField] int range = 10;
-    [SerializeField] int damage = 10;
-    [SerializeField] int attackDelay = 60;
-    [SerializeField] int windUp = 60;
+    [SerializeField] int rangeMax;
+    [SerializeField] int rangeMin;
+    [SerializeField] int damage;
+    [SerializeField] int attackDelay;
+    [SerializeField] int windUp;
 
     bool canAttack = true;
+    bool coroutineRuning = false;
     float attackDelayScaled;
 
 
@@ -32,53 +34,74 @@ public class EnemyDamageShooter : MonoBehaviour
     void Update()
     {
         var distance = player.transform.position - transform.position;
-
-        if (nav.stoppingDistance >= distance.magnitude)
+        if (!coroutineRuning)
         {
-            canAttack = false;
+            StartCoroutine("CheckDistance",distance);
         }
-        else if(range >= distance.magnitude && canAttack) 
+
+        if(rangeMax >= distance.magnitude && canAttack ) 
         {
             StartCoroutine("DealDamage", damage);
         }
+
+    }
+
+
+
+    private IEnumerator CheckDistance(float distance)
+    {
+        coroutineRuning = true;
+        if (distance <= rangeMin)
+        {
+            canAttack = false;
+        } 
+        yield return new WaitForSeconds(3f);
+        if (distance > rangeMin && distance <= rangeMax)
+        {
+            canAttack = true;
+        }
+        coroutineRuning = false;
     }
 
     private IEnumerator DealDamage(int damage)
     {
+        
         canAttack = false;
 
         RaycastHit hit;
-        Physics.Raycast(shootPoint.position, transform.forward, out hit, Mathf.Infinity);
 
-        print("Hit");
+        Physics.Raycast(shootPoint.position, transform.forward, out hit, Mathf.Infinity);
 
         if (hit.transform.CompareTag("Player"))
         {
-            //transform.getcomponent<faceplayer>().enabled = false;
-            //transform.getcomponent<chaseplayer>().enabled = false;
             print("HitPlayer");
+            transform.GetComponent<FacePlayer>().enabled = false;
+            transform.GetComponent<ChasePlayer>().enabled = false;
+
+            yield return new WaitForSeconds(windUp);
+
+            Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
+
+            if (hit.collider.tag == "Player")
+            {
+                player.GetComponent<PlayerHealth>().TakeDamage(damage);
+                print("HitPlayerAgain");
+            }
+
+            transform.GetComponent<FacePlayer>().enabled = true;
+
+            yield return new WaitForSeconds(attackDelay);
+
         }
 
-        yield return new WaitForSeconds(windUp);
-
-        Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity);
-
-        if (hit.collider.tag == "Player")
-        {
-            //player.GetComponent<PlayerHealth>().TakeDamage(damage);
-            print("HitPlayerAgain");
-        }
-
-        yield return new WaitForSeconds(attackDelay);
-
-        //transform.GetComponent<FacePlayer>().enabled = true;
-        //transform.GetComponent<ChasePlayer>().enabled = true;
+        transform.GetComponent<ChasePlayer>().enabled = true;
 
         canAttack = true;
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, rangeMax);
+        Gizmos.DrawWireSphere(transform.position, rangeMin);
     }
 }

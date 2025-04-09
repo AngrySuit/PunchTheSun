@@ -14,7 +14,8 @@ public class DealDamage : MonoBehaviour
        if (other.tag == "Enemy" || other.tag == "Destructable")
        {
             //If so gets the HitTaker component and makes it damage itself//
-           other.GetComponent<HitTaker>().TakeDamage(damage);
+
+            other.GetComponent<HitTaker>().TakeDamage(damage);
        }
     }
 

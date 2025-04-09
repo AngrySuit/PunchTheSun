@@ -57,9 +57,10 @@ public class PlayerAttack : MonoBehaviour
         animc.TrowPunch();
 
         GameObject Hay = Instantiate(HayMaker, PunchLocation.position, Orient.rotation);
+        Hay.GetComponentInChildren<DealDamage>().SetDamage(Mathf.RoundToInt(baseDamage * (charge / 100)));
         Hay.GetComponent<Transform>().localScale = new Vector3(1.5f, 1.5f, ((1.5f * (charge / 100) + 0.5f)));
-        Hay.GetComponentInChildren<DealDamage>().SetDamage(Mathf.RoundToInt(baseDamage * (charge/100)));
-        
+
+
         charge = 0;
 
         ChargeBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, charge);

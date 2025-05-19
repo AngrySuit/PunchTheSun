@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
         rB.velocity.Set(maxX,rB.velocity.y,maxZ);
 
         rB.AddRelativeForce(-rB.velocity * 0.6f);
-      
+
     }
 
 }

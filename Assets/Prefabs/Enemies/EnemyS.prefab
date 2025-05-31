@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2491527338023183936}
   - component: {fileID: 8920498090833479111}
   - component: {fileID: 933654409418166149}
-  - component: {fileID: 4357567679137745602}
   - component: {fileID: 7343794934540054560}
   - component: {fileID: 6586114651650284655}
+  - component: {fileID: 8721625948732998732}
   m_Layer: 0
   m_Name: EnemyS
   m_TagString: Enemy
@@ -178,25 +178,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4315217164682207802}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 221b4889301875241a68c727d2a7683c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4357567679137745602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4315217164682207802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc07adb2e93b8d248a4fc752c0529946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  attackDelay: 3
 --- !u!114 &7343794934540054560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeMax: 10
   rangeMin: 2
-  damage: 40
+  damage: -40
   attackDelay: 6
   windUp: 2
 --- !u!195 &6586114651650284655
@@ -236,6 +222,21 @@ NavMeshAgent:
   m_BaseOffset: 1.1111112
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 1
+--- !u!114 &8721625948732998732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4315217164682207802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e24609cde0fe5d41b46360071c1ee6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bootleSmall: {fileID: 7396507135159800116, guid: 24cc0f382a2159f419b63dab7d0f550c, type: 3}
+  bootleLarge: {fileID: 3166709526839992510, guid: a5db10311b4f4174aa9be3bd398745fe, type: 3}
+  Cigarete: {fileID: 2673716734742350444, guid: 210ec7d4c166503409309ff1261b73f7, type: 3}
 --- !u!1 &8921735828421826240
 GameObject:
   m_ObjectHideFlags: 0

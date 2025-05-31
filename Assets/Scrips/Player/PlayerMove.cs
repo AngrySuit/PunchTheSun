@@ -38,5 +38,4 @@ public class PlayerMove : MonoBehaviour
         rB.AddRelativeForce(-rB.velocity * 0.6f);
 
     }
-
 }

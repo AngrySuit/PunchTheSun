@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
+
+    // Declaring Variables //
+
     [SerializeField] int damage = 10;
     [SerializeField] int attackDelay = 60;
 
@@ -19,8 +22,6 @@ public class EnemyDamageDealer : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         var distance = player.transform.position - transform.position;
@@ -35,7 +36,7 @@ public class EnemyDamageDealer : MonoBehaviour
     {
         canAttack = false;
 
-        player.GetComponent<PlayerHealth>().TakeDamage(damage);
+        player.GetComponent<PlayerHealth>().ChangeHealth(damage);
 
         transform.GetComponent<ChasePlayer>().enabled = false;
 

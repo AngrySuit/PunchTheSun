@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1946620583629338582}
   - component: {fileID: 1471067003002760803}
   - component: {fileID: 3425393450171596049}
+  - component: {fileID: 1226909012755722704}
   m_Layer: 0
   m_Name: EnemyC
   m_TagString: Enemy
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc07adb2e93b8d248a4fc752c0529946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 35
+  damage: -35
   attackDelay: 240
 --- !u!195 &3425393450171596049
 NavMeshAgent:
@@ -217,3 +218,18 @@ NavMeshAgent:
   m_BaseOffset: 1.1111112
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 1
+--- !u!114 &1226909012755722704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703435951023622960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e24609cde0fe5d41b46360071c1ee6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bootleSmall: {fileID: 7396507135159800116, guid: 24cc0f382a2159f419b63dab7d0f550c, type: 3}
+  bootleLarge: {fileID: 3166709526839992510, guid: a5db10311b4f4174aa9be3bd398745fe, type: 3}
+  Cigarete: {fileID: 2673716734742350444, guid: 210ec7d4c166503409309ff1261b73f7, type: 3}

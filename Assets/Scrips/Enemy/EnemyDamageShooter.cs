@@ -20,11 +20,14 @@ public class EnemyDamageShooter : MonoBehaviour
     NavMeshAgent nav;
     GameObject player;
     Transform shootPoint;
+    Rigidbody rb;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
         nav = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
 
         shootPoint = transform.GetComponentInChildren<Transform>();
     }
@@ -34,38 +37,20 @@ public class EnemyDamageShooter : MonoBehaviour
     void Update()
     {
         var distance = player.transform.position - transform.position;
-        if (!coroutineRuning)
-        {
-            StartCoroutine("CheckDistance",distance);
-        }
 
-        if(rangeMax >= distance.magnitude && canAttack ) 
+        if(rangeMax >= distance.magnitude && rangeMin < distance.magnitude) 
         {
-            StartCoroutine("DealDamage", damage);
+            if (canAttack && !coroutineRuning)
+            {
+                StartCoroutine("DealDamageShoter", damage);
+            }
         }
 
     }
 
-
-
-    private IEnumerator CheckDistance(float distance)
+    public IEnumerator DealDamageShoter(int damage)
     {
         coroutineRuning = true;
-        if (distance <= rangeMin)
-        {
-            canAttack = false;
-        } 
-        yield return new WaitForSeconds(3f);
-        if (distance > rangeMin && distance <= rangeMax)
-        {
-            canAttack = true;
-        }
-        coroutineRuning = false;
-    }
-
-    private IEnumerator DealDamage(int damage)
-    {
-        
         canAttack = false;
 
         RaycastHit hit;
@@ -73,10 +58,13 @@ public class EnemyDamageShooter : MonoBehaviour
         Physics.Raycast(shootPoint.position, transform.forward, out hit, Mathf.Infinity);
 
         if (hit.transform.CompareTag("Player"))
-        {
-            print("HitPlayer");
+        {            
             transform.GetComponent<FacePlayer>().enabled = false;
             transform.GetComponent<ChasePlayer>().enabled = false;
+            nav.SetDestination(transform.position);
+
+            rb.velocity = Vector3.zero;
+
 
             yield return new WaitForSeconds(windUp);
 
@@ -84,7 +72,7 @@ public class EnemyDamageShooter : MonoBehaviour
 
             if (hit.collider.tag == "Player")
             {
-                player.GetComponent<PlayerHealth>().TakeDamage(damage);
+                player.GetComponent<PlayerHealth>().ChangeHealth(damage);
                 print("HitPlayerAgain");
             }
 
@@ -96,7 +84,9 @@ public class EnemyDamageShooter : MonoBehaviour
 
         transform.GetComponent<ChasePlayer>().enabled = true;
 
+
         canAttack = true;
+        coroutineRuning = false;
     }
 
     private void OnDrawGizmosSelected()

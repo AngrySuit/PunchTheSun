@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0e24609cde0fe5d41b46360071c1ee6b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bootleSmall: {fileID: 7396507135159800116, guid: 24cc0f382a2159f419b63dab7d0f550c, type: 3}
+  - bootleLarge: {fileID: 3166709526839992510, guid: a5db10311b4f4174aa9be3bd398745fe, type: 3}
+  - Cigarete: {fileID: 2673716734742350444, guid: 210ec7d4c166503409309ff1261b73f7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

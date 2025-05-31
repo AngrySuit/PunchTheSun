@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -12,7 +13,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject[] healthBags;
 
     [SerializeField] public int health = 100;
-    
+
+    bool CourotinePerfoming = false;
     
     // Start is called before the first frame update
     void Start()
@@ -21,16 +23,28 @@ public class PlayerHealth : MonoBehaviour
         healthText.text = health.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-
+        if (other.tag == "Collectible") 
+        {
+            if (other.transform.name == "Bootle Large Collectible")
+            {
+                StartCoroutine("UpdateHealth", +50);
+            }
+            else if (other.transform.name == "Bootle Small Collectible")
+            {
+                StartCoroutine("UpdateHealth", +30);
+            }
+            else if (other.transform.name == "Cig Collectible")
+            {
+                StartCoroutine("UpdateHealth", +10);
+            }
+        }
     }
 
-
-    public void TakeDamage(int damage)
+    public void ChangeHealth(int damage)
     {
-        StartCoroutine("UpdateHealth", damage);
+        if (!CourotinePerfoming) StartCoroutine("UpdateHealth", damage);
         
 
         if (health <= 0)
@@ -116,13 +130,20 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator UpdateHealth(int Change)
     {
+        CourotinePerfoming = true;
+
         for (int i = 0; i != Change; i++)
         {
-            health --;
-            healthText.text = health.ToString() ;
+            health += MathF.Sign(Change);
+            healthText.text = health.ToString();
+
             ChangeBag();
+
+            health = Mathf.Clamp(health, 0, 100);
 
             yield return new WaitForSeconds(0.03f);
         }
+
+        CourotinePerfoming = false;
     }
 }

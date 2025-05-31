@@ -13,6 +13,9 @@ public class HitTaker : MonoBehaviour
 
         if (health <= 0)
         {
+            ItemDroper itD = GetComponent<ItemDroper>();
+            itD.DropItems();
+
             Destroy(gameObject);
         }
     }

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ItemDroper : MonoBehaviour
 {
+    // Declaring Variables
     [SerializeField] private GameObject bootleSmall;
     [SerializeField] private GameObject bootleLarge;
     [SerializeField] private GameObject Cigarete;
 
+    // Rolls a random number and depending on result
+    // creates a different item in its place
     public void DropItems()
     {
         float Drop = UnityEngine.Random.Range(0f, 1f);

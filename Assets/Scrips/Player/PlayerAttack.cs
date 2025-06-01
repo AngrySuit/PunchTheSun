@@ -8,19 +8,20 @@ using UnityEngine.InputSystem;
 using Unity.Mathematics;
 public class PlayerAttack : MonoBehaviour
 {
-    
+    // Declares Components 
     [SerializeField] GameObject HayMaker;
     [SerializeField] Transform PunchLocation;
     [SerializeField] Transform Orient;
     [SerializeField] Image ChargeBar;
     [SerializeField] AnimationControler animc;
 
-
+    // Declares Variables
     public bool charging = false;
     public float charge = 0;
     int chargeSpeed = 45;
     int baseDamage = 45;
 
+    // Fecteces the bar
     private void Awake() => ChargeBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, charge);
 
     private void Update()
@@ -28,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
         ChargeUp();
     }
 
+    //Checks if the player is holding down the button
     public void OnFire(InputAction.CallbackContext attack)
     {
         if (attack.performed)
@@ -40,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    
     private void ChargeUp()
     {
         if (charging && charge < 100)
@@ -49,6 +52,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    // Instatiate the attack holding damage relative to charge
     private void TrowHayMaker()
     {
 

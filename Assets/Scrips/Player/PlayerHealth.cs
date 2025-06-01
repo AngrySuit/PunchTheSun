@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         healthText.text = health.ToString();
     }
 
+    // Heals you if you run over items
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag ==  "HealLarge")
@@ -40,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // checks if health can be damage 
     public void ChangeHealth(int damage)
     {
         if (!CourotinePerfoming) StartCoroutine("UpdateHealth", damage);
@@ -50,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
         } 
 
     }
-
+    // CHanges the halth icon depending on how much you have
     private void ChangeBag()
     {
         if (health >= 76)
@@ -125,6 +127,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
+
+    // slowly decreases health amount you can see
     private IEnumerator UpdateHealth(int Change)
     {
         if (Change < 0 ) CourotinePerfoming = true;

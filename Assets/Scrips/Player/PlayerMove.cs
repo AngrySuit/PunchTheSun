@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
         inputVector = moveVector.ReadValue<Vector2>();  
     }
 
+    // Adds velocity to the rb fowards and sideways
     private void ProcessMove()
     {
         var moventDirection = orient.forward * inputVector.y + orient.right * inputVector.x;

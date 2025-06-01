@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyDamageDealer : MonoBehaviour
 {
 
-    // Declaring Variables //
+    // Declaring Variables 
 
     [SerializeField] int damage;
     [SerializeField] int attackDelay;

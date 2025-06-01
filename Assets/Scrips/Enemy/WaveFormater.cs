@@ -12,6 +12,8 @@ public class WaveFormater : MonoBehaviour
 
     [SerializeField] Transform[] spawners;
 
+    [SerializeField] private List<Wave> Waves = new List<Wave>();
+
     bool enemysExist = false;
     bool SpawnignWave = false;
 
@@ -23,6 +25,8 @@ public class WaveFormater : MonoBehaviour
         public int amount;
     }
 
+
+    // Exists becasue nested lists dont display properlt
     [System.Serializable]
     private class Wave
     {
@@ -34,17 +38,18 @@ public class WaveFormater : MonoBehaviour
         }
     }
 
-    [SerializeField] private List<Wave> Waves = new List<Wave>();
+
 
     private void Awake()
     {
+        // Fetching varialbes 
         spawners = gameObject.GetComponentsInChildren<Transform>();
     }
 
 
     private void Update()
     {
-
+        // checks if theres no more enmies and if so spawns next wave
         if (!enemysExist) StartCoroutine("CheckWave");
 
         if (!SpawnignWave && GameObject.FindGameObjectWithTag("Enemy")) enemysExist = true;
@@ -70,17 +75,20 @@ public class WaveFormater : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        
+           
         int spawnerIndex = 0;
         
         Wave wave = getwave();
-
+        // gets the list of enemies in a wave out
         foreach (EnemyGroup enemyClass in wave.enemyAmountList)
         {
+            // gets the amount of enemies need to spawn out
+            // amd spanws that many
             for (int amount = enemyClass.amount; amount != 0; amount--)
             {
+                // rotates which spawner it spawns out
                 spawnerIndex++;
-
+                
                 if (spawnerIndex >= spawners.Count()) spawnerIndex = 0;
 
                 yield return null; /*new WaitForSeconds(0.5f);*/

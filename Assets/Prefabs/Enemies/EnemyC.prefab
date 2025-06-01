@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221b4889301875241a68c727d2a7683c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRange: 2
 --- !u!114 &1471067003002760803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: -35
-  attackDelay: 240
+  attackDelay: 3
 --- !u!195 &3425393450171596049
 NavMeshAgent:
   m_ObjectHideFlags: 0

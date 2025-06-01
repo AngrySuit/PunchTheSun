@@ -8,8 +8,8 @@ public class EnemyDamageDealer : MonoBehaviour
 
     // Declaring Variables //
 
-    [SerializeField] int damage = 10;
-    [SerializeField] int attackDelay = 60;
+    [SerializeField] int damage;
+    [SerializeField] int attackDelay;
 
     bool canAttack = true;
 
@@ -18,12 +18,17 @@ public class EnemyDamageDealer : MonoBehaviour
 
     private void Awake()
     {
+        // Fetching varialbes 
+
         player = GameObject.FindGameObjectWithTag("Player");
+
         nav = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        // Checks if player is in range to be hit and calls the coroutine if it is 
+
         var distance = player.transform.position - transform.position;
 
         if (nav.stoppingDistance >= distance.magnitude && canAttack)
@@ -34,6 +39,9 @@ public class EnemyDamageDealer : MonoBehaviour
 
     private IEnumerator DealDamage(int damage)
     {
+        // Stops the enemy temporarily while attacking and
+        // dellays the next attack longer still
+
         canAttack = false;
 
         player.GetComponent<PlayerHealth>().ChangeHealth(damage);
@@ -51,6 +59,7 @@ public class EnemyDamageDealer : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Draws the enemies range in the editor
         nav = GetComponent<NavMeshAgent>();
         Gizmos.DrawWireSphere(transform.position, nav.stoppingDistance);
     }

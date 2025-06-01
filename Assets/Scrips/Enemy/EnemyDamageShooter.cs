@@ -73,7 +73,6 @@ public class EnemyDamageShooter : MonoBehaviour
             if (hit.collider.tag == "Player")
             {
                 player.GetComponent<PlayerHealth>().ChangeHealth(damage);
-                print("HitPlayerAgain");
             }
 
             transform.GetComponent<FacePlayer>().enabled = true;

@@ -1,23 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEditor.Search;
 using UnityEngine;
 
 public class WaveFormater : MonoBehaviour
 {
-    [SerializeField] int waveCount = 0;
+    [SerializeField] int waveCount = 1;
 
     [SerializeField] Transform[] spawners;
 
-    bool beingPerformed = false;
+    bool enemysExist = false;
+    bool SpawnignWave = false;
 
 
     [System.Serializable]
     private class EnemyGroup
     {
-        public EnemyTypes enemyType;
         public GameObject enemy;
         public int amount;
     }
@@ -29,9 +30,7 @@ public class WaveFormater : MonoBehaviour
 
         public EnemyGroup GetInsides(int index)
         {
-            EnemyGroup tempVar = enemyAmountList[index];
-
-            return tempVar;
+            return enemyAmountList[index];
         }
     }
 
@@ -45,22 +44,25 @@ public class WaveFormater : MonoBehaviour
 
     private void Update()
     {
-        StartCoroutine("CheckWave");
+
+        if (!enemysExist) StartCoroutine("CheckWave");
+
+        if (!SpawnignWave && GameObject.FindGameObjectWithTag("Enemy")) enemysExist = true;
     }
 
 
     private IEnumerator CheckWave()
     {
-        if (waveCount < Waves.Count && !GameObject.FindGameObjectWithTag("Enemy") && !beingPerformed)
-        {
-            beingPerformed = true;
+        enemysExist = true;
+        SpawnignWave = true;
 
+        if (waveCount <= Waves.Count)
+        {
             yield return new WaitForSeconds(1f);
 
             StartCoroutine("SpawnWave");
 
             waveCount++;
-            beingPerformed = false;
         }
     }
 
@@ -68,23 +70,30 @@ public class WaveFormater : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
+        
+        int spawnerIndex = 0;
+        
         Wave wave = getwave();
-        Debug.Log("Performed");
+
         foreach (EnemyGroup enemyClass in wave.enemyAmountList)
         {
-            for (int amount = enemyClass.amount; amount > 0; amount--)
+            for (int amount = enemyClass.amount; amount != 0; amount--)
             {
-                Debug.Log("isTrue");
-                yield return new WaitForSeconds(0.5f);
-                GameObject.Instantiate(enemyClass.enemy, transform.position, Quaternion.identity);
+                spawnerIndex++;
+
+                if (spawnerIndex >= spawners.Count()) spawnerIndex = 0;
+
+                yield return null; /*new WaitForSeconds(0.5f);*/
+
+                GameObject.Instantiate(enemyClass.enemy, spawners[spawnerIndex].position, Quaternion.identity);
             }
-        }      
+        }
+
+        SpawnignWave = false;
     }
 
     private Wave getwave()
     {
-        Wave tempVar = Waves[waveCount];
-
-        return tempVar;
+        return Waves[waveCount - 1];
     }
 }

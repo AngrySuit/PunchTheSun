@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5544852523708398990}
   m_Layer: 0
   m_Name: Bootle Large Collectible
-  m_TagString: Collectible
+  m_TagString: HealLarge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

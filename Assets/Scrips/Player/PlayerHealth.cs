@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] public int health = 100;
 
-    bool CourotinePerfoming = false;
+    [SerializeField] bool CourotinePerfoming = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,32 +26,28 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Collectible") 
+        if (other.tag ==  "HealLarge")
         {
-            if (other.transform.name == "Bootle Large Collectible")
-            {
-                StartCoroutine("UpdateHealth", +50);
-            }
-            else if (other.transform.name == "Bootle Small Collectible")
-            {
-                StartCoroutine("UpdateHealth", +30);
-            }
-            else if (other.transform.name == "Cig Collectible")
-            {
-                StartCoroutine("UpdateHealth", +10);
-            }
+            StartCoroutine("UpdateHealth", +50);
+        }
+        else if (other.tag == "HealMedium")
+        {
+            StartCoroutine("UpdateHealth", +30);
+        }
+        else if (other.tag == "HealSmall")
+        {
+            StartCoroutine("UpdateHealth", +10);
         }
     }
 
     public void ChangeHealth(int damage)
     {
         if (!CourotinePerfoming) StartCoroutine("UpdateHealth", damage);
-        
 
         if (health <= 0)
         {
-            health = 100;
-        }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        } 
 
     }
 
@@ -130,20 +127,21 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator UpdateHealth(int Change)
     {
-        CourotinePerfoming = true;
+        if (Change < 0 ) CourotinePerfoming = true;
 
-        for (int i = 0; i != Change; i++)
+        for (int i = 0; i != Mathf.Abs(Change); i++)
         {
             health += MathF.Sign(Change);
             healthText.text = health.ToString();
 
             ChangeBag();
-
             health = Mathf.Clamp(health, 0, 100);
+            if (health == 100 || health == 0) StopCoroutine("UpdateHealth");
 
             yield return new WaitForSeconds(0.03f);
         }
 
+        yield return new WaitForSeconds(7f);
         CourotinePerfoming = false;
     }
 }
